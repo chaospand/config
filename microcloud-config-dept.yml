@@ -1,0 +1,89 @@
+spring:
+  profiles:
+    active:
+    - dev
+---
+server:
+  port: 8001
+  
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml    # mybatis配置文件所在路径
+  type-aliases-package: com.zemel.vo            # 定义所有操作类的别名所在包
+  mapper-locations:                                     # 所有的mapper映射文件
+  - classpath:mybatis/mapper/**/*.xml
+  
+spring:
+  profiles: dev
+  application:
+    name: dept-8001
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver      # 配置MySQL的驱动程序类
+    url: jdbc:mysql://localhost:3306/mldn8001           # 数据库连接地址
+    username: root                                  # 数据库用户名
+    password: 123456                            # 数据库连接密码
+    dbcp2:                                          # 进行数据库连接池的配置
+      min-idle: 5                                   # 数据库连接池的最小维持连接数    
+      initial-size: 5                               # 初始化提供的连接数
+      max-total: 5                                  # 最大的连接数
+      max-wait-millis: 200                          # 等待连接获取的最大超时时间
+ 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@eurekaserver-7001.com:7001/eureka,http://admin:admin@eurekaserver-7002.com:7002/eureka,http://admin:admin@eurekaserver-7003.com:7003/eureka
+  instance:
+    instanceId: dept-8001.com
+    prefer-ip-address: true #访问地址显示
+    # 不建议修改以下两项
+    # lease-expiration-duration-in-seconds: 2 #心跳间隔时间（默认30s）
+    # lease-renewal-interval-in-seconds: 5 #如果现在超过了5s间隔（默认是90秒）
+ 
+info:
+  app.name: mldn-microcloud
+  company.name: www.zemel.cn
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+    
+---
+server:
+  port: 8002
+  
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml    # mybatis配置文件所在路径
+  type-aliases-package: com.zemel.vo            # 定义所有操作类的别名所在包
+  mapper-locations:                                     # 所有的mapper映射文件
+  - classpath:mybatis/mapper/**/*.xml
+  
+spring:
+  profiles: beta
+  application:
+    name: dept-8002
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver      # 配置MySQL的驱动程序类
+    url: jdbc:mysql://localhost:3306/mldn8001           # 数据库连接地址
+    username: root                                  # 数据库用户名
+    password: 123456                            # 数据库连接密码
+    dbcp2:                                          # 进行数据库连接池的配置
+      min-idle: 5                                   # 数据库连接池的最小维持连接数    
+      initial-size: 5                               # 初始化提供的连接数
+      max-total: 5                                  # 最大的连接数
+      max-wait-millis: 200                          # 等待连接获取的最大超时时间
+ 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@eurekaserver-7001.com:7001/eureka,http://admin:admin@eurekaserver-7002.com:7002/eureka,http://admin:admin@eurekaserver-7003.com:7003/eureka
+  instance:
+    instanceId: dept-8002.com
+    prefer-ip-address: true #访问地址显示
+    # 不建议修改以下两项
+    # lease-expiration-duration-in-seconds: 2 #心跳间隔时间（默认30s）
+    # lease-renewal-interval-in-seconds: 5 #如果现在超过了5s间隔（默认是90秒）
+ 
+info:
+  app.name: mldn-microcloud
+  company.name: www.zemel.cn
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

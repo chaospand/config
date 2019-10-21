@@ -1,0 +1,59 @@
+spring:
+  profiles:
+    active:
+    - dev
+---
+ 
+server:
+  port: 7001
+  
+security:
+  basic:
+    enabled: true # 启用安全认证处理
+  user:
+    name: chaospanda #用户名
+    password: a001236987 #密码
+ 
+eureka:
+  # 一下两项不建议配置，默认配置即可
+  # enable-self-preservation: false #设置false表示关闭保护模式（理论上只有关闭保护模式之后，才能清理无效微服务操作）
+  # eviction-interval-timer-in-ms: 1000 #1s清理一次（默认是60s清理，可不配置）
+  instance:
+    hostname: eurekaserver-7001.com #定义Eureka实例所在的主机名称
+  client:
+    registerWithEureka: false #不注册信息
+    fetchRegistry: false #不获取信息
+    serviceUrl:
+      defaultZone: http://chaospanda:a001236987@eurekaserver-7001.com:7001/eureka
+spring:
+  profiles: dev
+  application:
+    name: eureka-server
+ 
+---
+ 
+server:
+  port: 7002
+  
+security:
+  basic:
+    enabled: true # 启用安全认证处理
+  user:
+    name: chaospanda #用户名
+    password: a001236987 #密码
+ 
+eureka:
+  # 一下两项不建议配置，默认配置即可
+  # enable-self-preservation: false #设置false表示关闭保护模式（理论上只有关闭保护模式之后，才能清理无效微服务操作）
+  # eviction-interval-timer-in-ms: 1000 #1s清理一次（默认是60s清理，可不配置）
+  instance:
+    hostname: eurekaserver-7002.com #定义Eureka实例所在的主机名称
+  client:
+    registerWithEureka: false #不注册信息
+    fetchRegistry: false #不获取信息
+    serviceUrl:
+      defaultZone: http://chaospanda:a001236987@eurekaserver-7002.com:7002/eureka
+spring:
+  profiles: beta
+  application:
+    name: eureka-server
